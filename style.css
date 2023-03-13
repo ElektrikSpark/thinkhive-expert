@@ -1,0 +1,84 @@
+#thinkhive-container > iframe {
+  box-sizing: border-box;
+  border: none;
+  display: block;
+  height: 76px !important;
+  width: 76px !important;
+  position: fixed;
+  top: auto;
+  left: auto;
+  bottom: 24px;
+  right: 24px;
+  visibility: visible;
+  z-index: inherit;
+  background: none transparent;
+}
+
+#thinkhive-container > iframe.thinkhive-open {
+  box-sizing: border-box;
+  border: none;
+  display: block;
+  height: 80% !important;
+  width: 400px !important;
+  position: fixed;
+  top: auto;
+  left: auto;
+  bottom: 0px;
+  right: 0px;
+  visibility: visible;
+  z-index: inherit;
+  background: none transparent;
+}
+
+#thinkhive-container > iframe.thinkhive-open-mobile {
+  box-sizing: border-box;
+  border: none;
+  display: block;
+  height: 100% !important;
+  width: 100% !important;
+  position: fixed;
+  top: auto;
+  left: auto;
+  bottom: 0px;
+  right: 0px;
+  visibility: visible;
+  z-index: inherit;
+  background: none transparent;
+  padding: 0;
+}
+
+/* media queries */
+
+@media only screen and (max-width: 399px) {
+  #thinkhive-container > iframe {
+    box-sizing: border-box;
+    border: none;
+    display: block;
+    height: 76px !important;
+    width: 76px !important;
+    position: fixed;
+    top: auto;
+    left: auto;
+    bottom: 12px;
+    right: 12px;
+    visibility: visible;
+    z-index: inherit;
+    background: none transparent;
+  }
+
+  #thinkhive-container > iframe.thinkhive-open {
+    box-sizing: border-box;
+    border: none;
+    display: block;
+    height: 80% !important;
+    width: 100% !important;
+    position: fixed;
+    top: auto;
+    left: auto;
+    bottom: 0px;
+    right: 0px;
+    visibility: visible;
+    z-index: inherit;
+    background: none transparent;
+  }
+}
