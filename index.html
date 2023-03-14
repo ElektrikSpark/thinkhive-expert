@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body style="background: #e7e7e7">
     <div
@@ -28,36 +28,15 @@
       style="height: 500px; width: 100%; border: none; overflow: hidden"
     ></iframe> -->
 
-    <script async src="index.js" data-expertId="1"></script>
     <script
+      async
+      src="index.js"
+      data-expertId="clf64e2470005v83jhtz9jv28"
+    ></script>
+    <!-- <script
+      async
       src="https://cdn.jsdelivr.net/gh/ElektrikSpark/thinkhive-expert@v0.1.0/index.min.js"
       data-expertId="1"
-    ></script>
-
-    <script>
-      {
-        `
-  (function(window, document) {
-    if (window.rooster) {
-      console.error('ChatRooster embed already included');
-      return;
-    }
-    window.rooster = {},
-    methods = ['init'];
-    window.rooster._c = [];
-    methods.forEach(methodName => window.rooster[methodName] = function() {
-      window.rooster._c.push([methodName, arguments])
-    });
-    var elt = document.createElement('script');
-    elt.type = "text/javascript";
-    elt.async = true;
-    elt.src = "https://js.chatrooster.com/shim.js";
-    var before = document.getElementsByTagName('script')[0];
-    before.parentNode.insertBefore(elt, before);
-  })(window, document, undefined);
-  rooster.init('6b5cd202-88d9-463f-9665-4428b25a8b33');
-  `;
-      }
-    </script>
+    ></script> -->
   </body>
 </html>

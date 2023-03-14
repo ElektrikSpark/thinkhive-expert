@@ -1,12 +1,25 @@
-import * as EventTypes from './eventTypes';
-import { isMobile, isTablet } from './helpers';
-
 (() => {
-  const loadWidget = () => {
-    const THINKHIVE_WRAPPER_ID = 'thinkhive-container';
-    const IFRAME_ID = 'thinkhive-iframe-element';
+  // event types
+  const INITIATE_INIT_IFRAME = 'INITIATE_INIT_IFRAME';
+  const INIT_IFRAME = 'INIT_IFRAME';
+  const CHANGE_CONTAINER_CLASS = 'CHANGE_CONTAINER_CLASS';
+  const CHANGE_CONTAINER_CLASS_DONE = 'CHANGE_CONTAINER_CLASS_DONE';
+  const DOMAIN_NOT_ALLOWED = 'DOMAIN_NOT_ALLOWED';
+  const BOOTSTRAP_DONE = 'BOOTSTRAP_DONE';
+  const LOCK_CLIENT_BODY = 'LOCK_CLIENT_BODY';
 
-    const script = document.currentScript;
+  // constants
+  const THINKHIVE_WRAPPER_ID = 'thinkhive-container';
+  const IFRAME_ID = 'thinkhive-iframe-element';
+
+  // helpers
+  const isMobile = () => window.innerWidth <= 600;
+  const isTablet = () => window.innerWidth > 600 && window.innerWidth < 768;
+
+  // needs to be out here
+  const script = document.currentScript;
+
+  const loadWidget = () => {
     const expertId = script?.getAttribute('data-expertId');
     const iframe = document.createElement('iframe');
     const iframeUrl = `http://localhost:3000/expert-iframe/${expertId}`;
@@ -43,7 +56,6 @@ import { isMobile, isTablet } from './helpers';
         wrapper.style.zIndex = `${Number.MAX_SAFE_INTEGER}`;
         wrapper.style.position = 'absolute';
 
-        ensureMounted();
         wrapper.appendChild(iframe);
 
         const ready = () => {
@@ -61,17 +73,21 @@ import { isMobile, isTablet } from './helpers';
     const receiveMessage = (event) => {
       if (!!event && !!event.data && !!event.data.type) {
         switch (event.data.type) {
-          case EventTypes.INITIATE_INIT_IFRAME:
+          case INITIATE_INIT_IFRAME:
             handleInitiateInitIframe();
             break;
-          case EventTypes.CHANGE_CONTAINER_CLASS:
+          case CHANGE_CONTAINER_CLASS:
             onChangeContainerClass(event.data.value);
             break;
-          case EventTypes.DOMAIN_NOT_ALLOWED:
+          case BOOTSTRAP_DONE:
+            break;
+          case DOMAIN_NOT_ALLOWED:
             handleDomainNotAllowed();
             break;
-          case EventTypes.LOCK_CLIENT_BODY:
+          case LOCK_CLIENT_BODY:
             handleLockClientBody(event.data.value);
+            break;
+          default:
             break;
         }
       }
@@ -80,10 +96,10 @@ import { isMobile, isTablet } from './helpers';
     const handleInitiateInitIframe = () => {
       iframe?.contentWindow?.postMessage(
         {
-          type: EventTypes.INIT_IFRAME,
+          type: INIT_IFRAME,
           value: {
             expertId: expertId,
-            topHost: window.location.host,
+            topHost: window.location.hostname,
           },
         },
         '*'
@@ -98,7 +114,7 @@ import { isMobile, isTablet } from './helpers';
       iframe.className = classnames;
       iframe?.contentWindow?.postMessage(
         {
-          type: EventTypes.CHANGE_CONTAINER_CLASS_DONE,
+          type: CHANGE_CONTAINER_CLASS_DONE,
           value: {
             deviceWidth: window.innerWidth,
           },
