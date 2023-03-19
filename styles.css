@@ -23,8 +23,8 @@
   position: fixed;
   top: auto;
   left: auto;
-  bottom: 0px;
-  right: 0px;
+  bottom: 24px;
+  right: 24px;
   visibility: visible;
   z-index: inherit;
   background: none transparent;
