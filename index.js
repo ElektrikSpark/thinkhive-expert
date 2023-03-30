@@ -20,10 +20,20 @@
   const CONTROLLER_SIZE = 50;
   const CONTROLLER_RADIUS = CONTROLLER_SIZE / 2;
   const CONTROLLER_BACKGROUND_COLOR = 'black';
+  // const CONTROLLER_ICON_SHARP = `
+  // <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  //   <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H6L4 18V4H20V16Z" fill="#FFFFFF"/>
+  // </svg>
+  // `;
   const CONTROLLER_ICON = `
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H6L4 18V4H20V16Z" fill="#FFFFFF"/>
-  </svg>
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#FFFFFF" width="24" height="24">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 011.037-.443 48.282 48.282 0 005.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
+</svg>
+`;
+  const CONTROLLER_CLOSE_ICON = `
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#FFFFFF" width="24" height="24">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+</svg>
 `;
 
   // helpers
@@ -39,7 +49,8 @@
     const controllerIframe = document.createElement('iframe');
     const chatIframe = document.createElement('iframe');
     const controllerIframeUrl = '';
-    const chatIframeUrl = `http://localhost:3000/expert-iframe/${expertId}`;
+    const chatIframeUrl = `https://www.thinkhive.ai/expert-iframe/${expertId}`;
+    // const chatIframeUrl = `http://localhost:3000/expert-iframe/${expertId}`;
     let domainAllowed = true;
 
     // PRIVATE METHODS
@@ -78,13 +89,22 @@
       controller.style.zIndex = `${Number.MAX_SAFE_INTEGER - 1}`;
       controller.style.cursor = 'pointer';
 
+      controller.addEventListener('mouseenter', () => {
+        controller.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+      });
+      controller.addEventListener('mouseleave', () => {
+        controller.style.backgroundColor = 'black';
+      });
+
       controller.addEventListener('click', () => {
         const chatWrapper = document.getElementById(CHAT_WRAPPER_ID);
         if (chatWrapper) {
           if (chatWrapper.style.display === 'none') {
             chatWrapper.style.display = 'flex';
+            controller.innerHTML = CONTROLLER_CLOSE_ICON;
           } else {
             chatWrapper.style.display = 'none';
+            controller.innerHTML = CONTROLLER_ICON;
           }
         }
       });
@@ -105,12 +125,10 @@
       chatWrapper.style.height = '70vh';
 
       chatWrapper.style.zIndex = `${Number.MAX_SAFE_INTEGER - 1}`;
-      chatWrapper.style.backgroundColor = 'black';
       chatWrapper.style.display = 'none';
-      chatWrapper.style.backgroundColor = '#fff';
       chatWrapper.style.boxShadow = '0 4px 8px 0 rgba(0, 0, 0, 0.2)';
       chatWrapper.style.border = '1px solid #D5D4D5';
-      chatWrapper.style.borderRadius = '10px';
+      chatWrapper.style.borderRadius = '8px';
       chatWrapper.style.overflow = 'hidden';
 
       return chatWrapper;
